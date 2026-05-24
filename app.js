@@ -33,7 +33,7 @@ const WATCHES = [
     id: 4,
     name: 'Tissot Lather',
     sub: 'CLASSIC REVIVAL',
-    price: '600',
+    price: '650',
     badge: 'CLASSIC',
     img: 'Tissot Lather.jpg',
   },
