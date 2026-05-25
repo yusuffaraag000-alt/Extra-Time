@@ -2,7 +2,7 @@
 const WATCHES = [
   {
     id: 3,
-    name: "Tissot RPX",
+    name: "Tissot PRX",
     sub: "STEEL BEAST",
     price: "400",
     badge: "STEEL",
@@ -18,7 +18,7 @@ const WATCHES = [
   },
   {
     id: 5,
-    name: "Patek Rubber",
+    name: "PAILY PHILIPPE",
     sub: "CAPTAIN LUXURY",
     price: "650",
     badge: "LUXURY",
@@ -42,7 +42,7 @@ const WATCHES = [
   },
   {
     id: 8,
-    name: "Catier",
+    name: "CARTIER",
     sub: "CLASSIC EDITION",
     price: "350",
     badge: "clASSIC",
