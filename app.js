@@ -2,7 +2,7 @@
 const WATCHES = [
   {
     id: 3,
-    name: "Tissot PRX",
+    name: "Tissot RPX",
     sub: "STEEL BEAST",
     price: "400",
     badge: "STEEL",
@@ -228,7 +228,7 @@ function renderProducts() {
     const card = document.createElement("div");
     card.className = "watch-card";
     card.style.animationDelay = `${i * 0.05}s`;
-    card.innerHTML = `<div class="card-img-wrap"><img src="${w.img}" alt="${w.name}" loading="lazy"><div class="card-badge">${w.badge}</div></div><div class="card-body"><div class="card-name">${w.name}</div><div class="card-sub">${w.sub}</div><div class="card-footer"><div class="card-price">${w.price} <span>جنيه</span></div><button class="card-btn" data-name="${w.name}">اطلب دلوقتي</button></div></div>`;
+    card.innerHTML = `<div class="card-img-wrap"><img src="${w.img}" alt="${w.name}" loading="lazy"><div class="card-badge">${w.badge}</div></div><div class="card-body"><div class="card-name">${w.name}</div><div class="card-sub">${w.sub}</div><div class="card-footer"><div class="card-price">${w.price} <span>جنيه</span></div><button class="card-btn" data-name="${w.name}"> قريبا</button></div></div>`;
     grid.appendChild(card);
   });
   grid.addEventListener("click", (e) => {
