@@ -1,4 +1,4 @@
-// ========== ORIGINAL WATCH DATA (مستمر كما هو) ==========
+// ========== ORIGINAL WATCH DATA ==========
 const WATCHES = [
   {
     id: 3,
@@ -36,7 +36,7 @@ const WATCHES = [
     id: 7,
     name: "Lacoste",
     sub: "MAESTRO BROWN",
-    price: "450",
+    price: "650",
     badge: "NEW",
     img: "Lacoste.jpg",
   },
@@ -44,8 +44,8 @@ const WATCHES = [
     id: 8,
     name: "Catier",
     sub: "CLASSIC EDITION",
-    price: "650",
-    badge: "350",
+    price: "350",
+    badge: "clASSIC",
     img: "Catier.jpg",
   },
   {
@@ -72,107 +72,50 @@ let journeyStarted = false;
 let autoTimer = null;
 let isSkipping = false;
 
-// ========== CREATE WORD SCREEN WITH SKIP BUTTON ==========
 function createWordScreen(data, idx) {
   const div = document.createElement("div");
   div.className = "word-screen";
-  div.style.position = "fixed";
-  div.style.inset = "0";
-  div.style.zIndex = "1900";
-  div.style.display = "flex";
-  div.style.alignItems = "center";
-  div.style.justifyContent = "center";
-  div.style.flexDirection = "column";
-  div.style.transition =
-    "opacity 0.4s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1)";
-  div.style.opacity = "0";
-  div.style.visibility = "hidden";
-  div.style.transform = "scale(0.96)";
   div.style.backgroundColor = data.bgColor;
   div.style.color = data.textColor;
-
   const wordEl = document.createElement("div");
   wordEl.className = "word-large";
-  wordEl.style.fontFamily = "var(--font-display)";
-  wordEl.style.fontSize = "clamp(3.5rem, 15vw, 9rem)";
-  wordEl.style.fontWeight = "900";
-  wordEl.style.letterSpacing = "-0.02em";
-  wordEl.style.textAlign = "center";
-  wordEl.style.padding = "1rem";
-  wordEl.style.animation =
-    "wordFadeIn 0.35s cubic-bezier(0.2, 0.9, 0.4, 1) forwards";
   wordEl.textContent = data.word;
-
   const skipBtn = document.createElement("button");
   skipBtn.className = "skip-btn";
   skipBtn.textContent = "تخطي ←";
-  skipBtn.style.position = "absolute";
-  skipBtn.style.bottom = "2rem";
-  skipBtn.style.left = "2rem";
-  skipBtn.style.background = "rgba(0,0,0,0.6)";
-  skipBtn.style.backdropFilter = "blur(8px)";
-  skipBtn.style.border = "1px solid rgba(212,175,92,0.4)";
-  skipBtn.style.color = "#d4af5c";
-  skipBtn.style.padding = "0.5rem 1.2rem";
-  skipBtn.style.borderRadius = "40px";
-  skipBtn.style.fontFamily = "var(--font-arabic)";
-  skipBtn.style.fontSize = "0.8rem";
-  skipBtn.style.cursor = "pointer";
-  skipBtn.style.zIndex = "2001";
-  skipBtn.style.transition = "all 0.3s ease";
   skipBtn.addEventListener("click", skipIntro);
-
   div.appendChild(wordEl);
   div.appendChild(skipBtn);
   document.body.appendChild(div);
   return div;
 }
 
-// ========== SKIP FUNCTION (تخطي سريع) ==========
 function skipIntro() {
   if (isSkipping) return;
   isSkipping = true;
-
   if (autoTimer) clearTimeout(autoTimer);
-
-  // إخفاء جميع شاشات الكلمات فوراً
   wordScreens.forEach((screen) => {
-    screen.classList.remove("active");
     screen.style.opacity = "0";
     screen.style.visibility = "hidden";
     setTimeout(() => {
       if (screen.parentNode) screen.remove();
     }, 100);
   });
-
-  // الانتقال مباشرة إلى شاشة البراند ثم المتجر
   showBrandFinalAndStoreDirect();
 }
 
 function createBrandFinal() {
   const div = document.createElement("div");
   div.className = "brand-final-screen";
-  div.style.position = "fixed";
-  div.style.inset = "0";
-  div.style.zIndex = "1950";
-  div.style.display = "flex";
-  div.style.alignItems = "center";
-  div.style.justifyContent = "center";
-  div.style.flexDirection = "column";
-  div.style.transition =
-    "opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1)";
-  div.style.opacity = "0";
-  div.style.visibility = "hidden";
-  div.style.transform = "scale(0.96)";
   div.style.backgroundColor = "#0a0a0a";
   div.style.color = "#d4af5c";
   div.innerHTML = `
         <div style="display:flex; flex-direction:column; align-items:center; line-height:0.85; margin-bottom:1rem;">
-          <span style="font-family:var(--font-display); font-size:clamp(3rem,12vw,7rem); font-weight:900; letter-spacing:-0.02em;">EXTRA</span>
-          <span style="font-family:var(--font-display); font-size:clamp(3rem,12vw,7rem); font-weight:900; letter-spacing:-0.02em; color:transparent; -webkit-text-stroke:2px #d4af5c; text-shadow:0 0 30px rgba(212,175,92,0.4);">TIME</span>
-          <span style="font-family:var(--font-display); font-size:clamp(3rem,12vw,7rem); font-weight:900; letter-spacing:-0.02em;">90</span>
+          <span style="font-family:var(--font-display); font-size:clamp(3rem,12vw,7rem); font-weight:900;">EXTRA</span>
+          <span style="font-family:var(--font-display); font-size:clamp(3rem,12vw,7rem); font-weight:900; color:transparent; -webkit-text-stroke:2px #d4af5c;">TIME</span>
+          <span style="font-family:var(--font-display); font-size:clamp(3rem,12vw,7rem); font-weight:900;">90</span>
         </div>
-        <div style="font-family:var(--font-arabic); font-size:1rem; margin-top:1.5rem; opacity:0.7; letter-spacing:0.1em;">الوقت الإضافي لأصحاب الطموح</div>
+        <div style="font-family:var(--font-arabic); font-size:1rem; margin-top:1.5rem; opacity:0.7;">الوقت الإضافي لأصحاب الطموح</div>
       `;
   document.body.appendChild(div);
   return div;
@@ -181,17 +124,12 @@ function createBrandFinal() {
 let brandScreen = null;
 
 function showBrandFinalAndStoreDirect() {
-  if (!brandScreen) {
-    brandScreen = createBrandFinal();
-  }
+  if (!brandScreen) brandScreen = createBrandFinal();
   brandScreen.style.opacity = "1";
   brandScreen.style.visibility = "visible";
   brandScreen.style.transform = "scale(1)";
-
   setTimeout(() => {
     brandScreen.style.opacity = "0";
-    brandScreen.style.transform = "scale(0.96)";
-
     setTimeout(() => {
       const landing = document.getElementById("landing");
       const store = document.getElementById("mainStore");
@@ -212,17 +150,12 @@ function showBrandFinalAndStoreDirect() {
 }
 
 function showBrandFinalAndStore() {
-  if (!brandScreen) {
-    brandScreen = createBrandFinal();
-  }
+  if (!brandScreen) brandScreen = createBrandFinal();
   brandScreen.style.opacity = "1";
   brandScreen.style.visibility = "visible";
   brandScreen.style.transform = "scale(1)";
-
   setTimeout(() => {
     brandScreen.style.opacity = "0";
-    brandScreen.style.transform = "scale(0.96)";
-
     setTimeout(() => {
       const landing = document.getElementById("landing");
       const store = document.getElementById("mainStore");
@@ -252,9 +185,7 @@ function showWord(index) {
   screen.style.opacity = "1";
   screen.style.visibility = "visible";
   screen.style.transform = "scale(1)";
-
   if (autoTimer) clearTimeout(autoTimer);
-  // تسريع التتابع: 0.9 ثانية فقط بدلاً من 1.3
   autoTimer = setTimeout(() => {
     nextWord();
   }, 900);
@@ -288,7 +219,7 @@ function startJourney() {
   showWord(0);
 }
 
-// ========== ORIGINAL FUNCTIONS (لم يتم التعديل عليها) ==========
+// ========== ORIGINAL FUNCTIONS ==========
 function renderProducts() {
   const grid = document.getElementById("productsGrid");
   if (!grid) return;
@@ -339,20 +270,15 @@ function initMorphTransition() {
   const overlay = document.getElementById("morphOverlay");
   const landing = document.getElementById("landing");
   if (!btn) return;
-
   btn.addEventListener("click", (e) => {
     createRipple(e, btn);
     btn.style.pointerEvents = "none";
-
     const rect = btn.getBoundingClientRect();
     overlay.style.width = rect.width + "px";
     overlay.style.height = rect.height + "px";
     overlay.style.top = rect.top + rect.height / 2 + "px";
     overlay.style.left = rect.left + rect.width / 2 + "px";
-    overlay.style.transform = "translate(-50%, -50%) scale(0)";
-    overlay.offsetHeight;
     overlay.classList.add("active");
-
     setTimeout(() => {
       landing.style.opacity = "0";
       setTimeout(() => {
@@ -360,16 +286,12 @@ function initMorphTransition() {
         startJourney();
       }, 150);
     }, 400);
-
     setTimeout(() => {
-      overlay.style.transition = "opacity 0.6s ease";
       overlay.style.opacity = "0";
     }, 700);
-
     setTimeout(() => {
       overlay.style.display = "none";
       overlay.style.opacity = "1";
-      overlay.style.transition = "";
     }, 1200);
   });
 }
@@ -402,7 +324,6 @@ function initReveal() {
     { threshold: 0.1 },
   );
   reveals.forEach((r) => obs.observe(r));
-
   const storySections = document.querySelectorAll(".story-section");
   storySections.forEach((sec) => {
     sec.style.opacity = "0";
@@ -442,6 +363,17 @@ function initCardAnimations() {
   });
 }
 
+// ========== زر الانزلاق للكولكشن ==========
+function initScrollToCollection() {
+  const scrollBtn = document.getElementById("scrollToCollectionBtn");
+  const catalogSection = document.getElementById("catalog");
+  if (scrollBtn && catalogSection) {
+    scrollBtn.addEventListener("click", () => {
+      catalogSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+}
+
 // ========== INITIALIZATION ==========
 document.addEventListener("DOMContentLoaded", () => {
   spawnParticles();
@@ -450,6 +382,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initNavbarScroll();
   initCardAnimations();
+  initScrollToCollection();
 
   const modalClose = document.getElementById("modalClose");
   const modalOverlay = document.getElementById("modalOverlay");
@@ -465,7 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.matchMedia("(pointer: fine)").matches) {
     const glowDiv = document.createElement("div");
     glowDiv.style.cssText =
-      "position:fixed; width:320px; height:320px; border-radius:50%; background:radial-gradient(circle, rgba(212,175,92,0.04) 0%, transparent 70%); pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition: opacity 0.2s;";
+      "position:fixed; width:320px; height:320px; border-radius:50%; background:radial-gradient(circle, rgba(212,175,92,0.04) 0%, transparent 70%); pointer-events:none; z-index:9999; transform:translate(-50%,-50%);";
     document.body.appendChild(glowDiv);
     document.addEventListener("mousemove", (e) => {
       glowDiv.style.left = e.clientX + "px";
